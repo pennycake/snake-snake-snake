@@ -347,6 +347,38 @@ function moveSnake(snake, deltaTime) {
     }
 }
 
+// ====== SIMPLE BUTTON DRAWING ======
+// Draws a basic clickable button
+function drawButton(x, y, text, key) {
+    // Save current context state
+    ctx.save();
+    
+    // Button dimensions
+    const buttonWidth = 200;
+    const buttonHeight = 40;
+    const buttonX = x - buttonWidth / 2;
+    const buttonY = y - buttonHeight / 2;
+    
+    // Draw button background
+    ctx.fillStyle = '#333';
+    ctx.fillRect(buttonX, buttonY, buttonWidth, buttonHeight);
+    
+    // Draw button border
+    ctx.strokeStyle = '#666';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(buttonX, buttonY, buttonWidth, buttonHeight);
+    
+    // Draw button text
+    ctx.fillStyle = '#fff';
+    ctx.font = '16px Arial';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(`${text} (${key})`, x, y);
+    
+    // Restore context state
+    ctx.restore();
+}
+
 // ====== DRAWING ======
 // Renders the game state to the canvas
 function draw() {
@@ -495,11 +527,10 @@ function draw() {
             ctx.fillText(`High Score: ${highScore}`, canvas.width / 2, canvas.height / 2 - 10);
 
             // Settings button
-            ctx.font = '18px Arial';
-            ctx.fillText('Press S for Settings', canvas.width / 2, canvas.height / 2 + 20);
+            drawButton(canvas.width / 2, canvas.height / 2 + 20, 'Settings', 'S');
 
-            // Restart instruction
-            ctx.fillText('Press R to Restart', canvas.width / 2, canvas.height / 2 + 50);
+            // Restart button
+            drawButton(canvas.width / 2, canvas.height / 2 + 70, 'Restart', 'R');
         } else {
             // Settings menu
             ctx.fillStyle = '#fff';
@@ -522,17 +553,16 @@ function draw() {
                 ctx.fillText(individualSpeeds ? 'ON' : 'OFF', canvas.width / 2, canvas.height / 2 + 85);
             }
 
-            // Instructions
-            ctx.font = '16px Arial';
-            ctx.fillText('Press T to Toggle Counter', canvas.width / 2, canvas.height / 2 + 110);
-            ctx.fillText('Press Y to Toggle Speed', canvas.width / 2, canvas.height / 2 + 130);
+            // Settings buttons
+            drawButton(canvas.width / 2, canvas.height / 2 + 110, 'Toggle Counter', 'T');
+            drawButton(canvas.width / 2, canvas.height / 2 + 160, 'Toggle Speed', 'Y');
             if (speedIncrease) {
-                ctx.fillText('Press I to Toggle Individual', canvas.width / 2, canvas.height / 2 + 150);
-                ctx.fillText('Press R to Restart', canvas.width / 2, canvas.height / 2 + 170);
-                ctx.fillText('Press ESC to Close', canvas.width / 2, canvas.height / 2 + 190);
+                drawButton(canvas.width / 2, canvas.height / 2 + 210, 'Toggle Individual', 'I');
+                drawButton(canvas.width / 2, canvas.height / 2 + 260, 'Restart', 'R');
+                drawButton(canvas.width / 2, canvas.height / 2 + 310, 'Close', 'ESC');
             } else {
-                ctx.fillText('Press R to Restart', canvas.width / 2, canvas.height / 2 + 150);
-                ctx.fillText('Press ESC to Close', canvas.width / 2, canvas.height / 2 + 170);
+                drawButton(canvas.width / 2, canvas.height / 2 + 210, 'Restart', 'R');
+                drawButton(canvas.width / 2, canvas.height / 2 + 260, 'Close', 'ESC');
             }
             
             // Warning message if speed settings were changed while paused
@@ -569,14 +599,13 @@ function draw() {
             ctx.fillText(`High Score: ${highScore}`, canvas.width / 2, canvas.height / 2 - 10);
 
             // Settings button
-            ctx.font = '18px Arial';
-            ctx.fillText('Press S for Settings', canvas.width / 2, canvas.height / 2 + 20);
+            drawButton(canvas.width / 2, canvas.height / 2 + 20, 'Settings', 'S');
 
-            // Resume instruction
-            ctx.fillText('Press P to Play', canvas.width / 2, canvas.height / 2 + 50);
+            // Resume button
+            drawButton(canvas.width / 2, canvas.height / 2 + 70, 'Unpause', 'P');
             
-            // Restart instruction
-            ctx.fillText('Press R to Restart', canvas.width / 2, canvas.height / 2 + 80);
+            // Restart button
+            drawButton(canvas.width / 2, canvas.height / 2 + 120, 'Restart', 'R');
         } else {
             // Settings menu (same as game over)
             ctx.fillStyle = '#fff';
@@ -599,17 +628,16 @@ function draw() {
                 ctx.fillText(individualSpeeds ? 'ON' : 'OFF', canvas.width / 2, canvas.height / 2 + 85);
             }
 
-            // Instructions
-            ctx.font = '16px Arial';
-            ctx.fillText('Press T to Toggle Counter', canvas.width / 2, canvas.height / 2 + 110);
-            ctx.fillText('Press Y to Toggle Speed', canvas.width / 2, canvas.height / 2 + 130);
+            // Settings buttons
+            drawButton(canvas.width / 2, canvas.height / 2 + 110, 'Toggle Counter', 'T');
+            drawButton(canvas.width / 2, canvas.height / 2 + 160, 'Toggle Speed', 'Y');
             if (speedIncrease) {
-                ctx.fillText('Press I to Toggle Individual', canvas.width / 2, canvas.height / 2 + 150);
-                ctx.fillText('Press R to Restart', canvas.width / 2, canvas.height / 2 + 170);
-                ctx.fillText('Press ESC to Close', canvas.width / 2, canvas.height / 2 + 190);
+                drawButton(canvas.width / 2, canvas.height / 2 + 210, 'Toggle Individual', 'I');
+                drawButton(canvas.width / 2, canvas.height / 2 + 260, 'Restart', 'R');
+                drawButton(canvas.width / 2, canvas.height / 2 + 310, 'Close', 'ESC');
             } else {
-                ctx.fillText('Press R to Restart', canvas.width / 2, canvas.height / 2 + 150);
-                ctx.fillText('Press ESC to Close', canvas.width / 2, canvas.height / 2 + 170);
+                drawButton(canvas.width / 2, canvas.height / 2 + 210, 'Restart', 'R');
+                drawButton(canvas.width / 2, canvas.height / 2 + 260, 'Close', 'ESC');
             }
             
             // Warning message if speed settings were changed while paused
@@ -707,6 +735,18 @@ function handleTouchEnd(event) {
     // Prevent default touch behavior
     event.preventDefault();
     
+    // Check if touch is on menu buttons (works on all devices)
+    if (gameOver || gamePaused) {
+        const touch = event.changedTouches[0];
+        const rect = canvas.getBoundingClientRect();
+        const canvasX = touch.clientX - rect.left;
+        const canvasY = touch.clientY - rect.top;
+        
+        // Handle button clicks
+        handleButtonClick(canvasX, canvasY);
+        return;
+    }
+    
     // Only process if we have a valid touch start
     if (touchStartX === 0 && touchStartY === 0) return;
     
@@ -778,6 +818,96 @@ function handleTouchEnd(event) {
     touchStartX = 0;
     touchStartY = 0;
     touchStartTime = 0;
+}
+
+// ====== BUTTON CLICK HANDLER ======
+// Handles clicks on menu buttons
+function handleButtonClick(canvasX, canvasY) {
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    
+    if (!showSettings) {
+        // Main menu buttons
+        const buttonHeight = 40;
+        const startY = centerY + 20;
+        
+        // Settings button
+        if (canvasY >= startY - buttonHeight/2 && canvasY <= startY + buttonHeight/2) {
+            showSettings = true;
+            console.log('Settings opened');
+            return;
+        }
+        
+        // Restart button
+        if (canvasY >= startY + 50 - buttonHeight/2 && canvasY <= startY + 50 + buttonHeight/2) {
+            restartGame();
+            console.log('Game restarted');
+            return;
+        }
+        
+        // Resume button (pause menu only)
+        if (gamePaused && canvasY >= startY + 100 - buttonHeight/2 && canvasY <= startY + 100 + buttonHeight/2) {
+            gamePaused = false;
+            showSettings = false;
+            console.log('Game resumed');
+            return;
+        }
+    } else {
+        // Settings menu buttons
+        const buttonHeight = 40;
+        const startY = centerY + 110;
+        
+        // Toggle Counter
+        if (canvasY >= startY - buttonHeight/2 && canvasY <= startY + buttonHeight/2) {
+            showLiveCounter = !showLiveCounter;
+            saveSettings();
+            console.log('Counter toggled:', showLiveCounter);
+            return;
+        }
+        
+        // Toggle Speed
+        if (canvasY >= startY + 50 - buttonHeight/2 && canvasY <= startY + 50 + buttonHeight/2) {
+            speedIncrease = !speedIncrease;
+            if (!speedIncrease) individualSpeeds = false;
+            saveSettings();
+            console.log('Speed toggled:', speedIncrease);
+            return;
+        }
+        
+        // Toggle Individual (if speed is on)
+        if (speedIncrease && canvasY >= startY + 100 - buttonHeight/2 && canvasY <= startY + 100 + buttonHeight/2) {
+            individualSpeeds = !individualSpeeds;
+            saveSettings();
+            console.log('Individual toggled:', individualSpeeds);
+            return;
+        }
+        
+        // Restart
+        if (canvasY >= startY + 150 - buttonHeight/2 && canvasY <= startY + 150 + buttonHeight/2) {
+            restartGame();
+            console.log('Game restarted');
+            return;
+        }
+        
+        // Close
+        if (canvasY >= startY + 200 - buttonHeight/2 && canvasY <= startY + 200 + buttonHeight/2) {
+            showSettings = false;
+            console.log('Settings closed');
+            return;
+        }
+    }
+}
+
+// ====== MOUSE CLICK HANDLER ======
+// Handles mouse clicks on buttons
+function handleMouseClick(event) {
+    if (!gameOver && !gamePaused) return;
+    
+    const rect = canvas.getBoundingClientRect();
+    const canvasX = event.clientX - rect.left;
+    const canvasY = event.clientY - rect.top;
+    
+    handleButtonClick(canvasX, canvasY);
 }
 
 // ====== KEYBOARD CONTROLS ======
@@ -919,6 +1049,9 @@ document.addEventListener('keydown', handleKeyPress);
 // Add touch event listeners for mobile controls
 canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
 canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+// Add mouse click event listener
+canvas.addEventListener('click', handleMouseClick);
 
 // Add fullscreen event listeners (F11, browser controls, etc.)
 document.addEventListener('fullscreenchange', handleFullscreenChange);

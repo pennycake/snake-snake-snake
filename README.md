@@ -4,7 +4,9 @@
 
 # Snake Snake Snake 🐍
 
-Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move together, longest ones turn light green. Don't hit yourself or other snakes or it's game over.
+Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move together, but move at different speeds based on their length. Don't hit yourself or other snakes or it's game over. 
+
+How many snakes can you keep on the screen at once?
 
 ## 🎮 Controls
 
@@ -21,8 +23,8 @@ Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move 
 
 ### Mobile
 - **Swipe**: Move all snakes (up/down/left/right)
-- **Tap**: Access pause menu and settings
 - **All other controls**: Same as desktop
+- **No pause**: Wait for round end to change settings
 
 ## ❓ How to Play
 
@@ -37,8 +39,5 @@ Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move 
 - **Live Counter**: Show/hide snake count
 - **Speed Increase**: Snakes get faster with each fruit
 - **Individual Speeds**: Each snake speeds up independently
-- **Fullscreen**: Press F11 for immersive gameplay
 
 Settings save automatically when you change them!
-
-## ⚠️⚠️ Designed for keyboard - preliminary touch controls added, but only default game settings work on mobile ⚠️⚠️
