@@ -1,3 +1,7 @@
+## 🚀 Play Now
+
+[Play Snake Snake Snake](https://pennycake.github.io/snake-snake-snake)
+
 # Snake Snake Snake 🐍
 
 Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move together, longest ones turn light green. Don't hit yourself or other snakes or it's game over.
@@ -14,7 +18,7 @@ Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move 
 - **I**: Toggle individual speeds (when speed increase is on)
 - **Escape**: Close settings
 
-## ❓❓ How to Play
+## ❓ How to Play
 
 1. Use arrow keys to move your snake
 2. Eat the red fruit to grow and spawn new snakes
@@ -30,7 +34,3 @@ Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move 
 - **Fullscreen**: Press F11 for immersive gameplay
 
 Settings save automatically when you change them!
-
-## 🚀 Play Now
-
-[Play Snake Snake Snake](https://pennycake.github.io/snake-snake-snake)
