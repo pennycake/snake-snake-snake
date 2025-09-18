@@ -34,6 +34,13 @@ let speedSettingChanged = false;  // Track if speed settings were changed while 
 let originalSpeedIncrease = false;  // Speed increase setting when game was paused
 let originalIndividualSpeeds = false;  // Individual speeds setting when game was paused
 
+// ====== TOUCH CONTROLS ======
+let touchStartX = 0;  // Starting X position of touch
+let touchStartY = 0;  // Starting Y position of touch
+let touchStartTime = 0;  // When touch started
+const minSwipeDistance = 30;  // Minimum distance for a swipe (pixels)
+const maxSwipeTime = 500;  // Maximum time for a swipe (milliseconds)
+
 // ====== SETTINGS PERSISTENCE ======
 // Load settings from localStorage on page load
 function loadSettings() {
@@ -680,6 +687,99 @@ function restartGame() {
     console.log('Game restarted!');
 }
 
+// ====== TOUCH CONTROLS ======
+// Handles touch start events
+function handleTouchStart(event) {
+    // Prevent default touch behavior (scrolling, zooming)
+    event.preventDefault();
+    
+    // Get the first touch point
+    const touch = event.touches[0];
+    touchStartX = touch.clientX;
+    touchStartY = touch.clientY;
+    touchStartTime = Date.now();
+    
+    console.log('Touch started at:', touchStartX, touchStartY);
+}
+
+// Handles touch end events and detects swipe direction
+function handleTouchEnd(event) {
+    // Prevent default touch behavior
+    event.preventDefault();
+    
+    // Only process if we have a valid touch start
+    if (touchStartX === 0 && touchStartY === 0) return;
+    
+    // Get the touch end position
+    const touch = event.changedTouches[0];
+    const touchEndX = touch.clientX;
+    const touchEndY = touch.clientY;
+    const touchEndTime = Date.now();
+    
+    // Calculate swipe distance and time
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    const deltaTime = touchEndTime - touchStartTime;
+    
+    // Calculate distance using Pythagorean theorem
+    const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    
+    console.log('Touch ended. Distance:', distance, 'Time:', deltaTime);
+    
+    // Check if this qualifies as a swipe
+    if (distance >= minSwipeDistance && deltaTime <= maxSwipeTime) {
+        // Determine swipe direction based on which axis has the larger movement
+        let newDirection = null;
+        
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            // Horizontal swipe
+            if (deltaX > 0) {
+                newDirection = { x: 1, y: 0 };  // Swipe right
+                console.log('Swipe right detected');
+            } else {
+                newDirection = { x: -1, y: 0 }; // Swipe left
+                console.log('Swipe left detected');
+            }
+        } else {
+            // Vertical swipe
+            if (deltaY > 0) {
+                newDirection = { x: 0, y: 1 };   // Swipe down
+                console.log('Swipe down detected');
+            } else {
+                newDirection = { x: 0, y: -1 }; // Swipe up
+                console.log('Swipe up detected');
+            }
+        }
+        
+        // Apply the new direction using the same logic as keyboard controls
+        if (newDirection && snakes.length > 0) {
+            const currentDir = snakes[0].direction;
+            const currentTime = performance.now();
+            
+            // Check if direction change is valid (same as keyboard logic)
+            let isValidDirection = false;
+            if (newDirection.x === 1 && currentDir.x !== -1) isValidDirection = true;  // Right
+            if (newDirection.x === -1 && currentDir.x !== 1) isValidDirection = true;   // Left
+            if (newDirection.y === 1 && currentDir.y !== -1) isValidDirection = true;    // Down
+            if (newDirection.y === -1 && currentDir.y !== 1) isValidDirection = true;  // Up
+            
+            // Apply direction change if valid and enough time has passed
+            if (isValidDirection && currentTime - lastInputTime >= minInputInterval) {
+                snakes.forEach(snake => {
+                    snake.direction = newDirection;
+                });
+                lastInputTime = currentTime;
+                console.log('Snake direction changed via touch:', newDirection);
+            }
+        }
+    }
+    
+    // Reset touch start values
+    touchStartX = 0;
+    touchStartY = 0;
+    touchStartTime = 0;
+}
+
 // ====== KEYBOARD CONTROLS ======
 // Handles arrow key presses to control all snakes' direction
 function handleKeyPress(event) {
@@ -815,6 +915,10 @@ function handleKeyPress(event) {
 
 // Add keyboard event listener
 document.addEventListener('keydown', handleKeyPress);
+
+// Add touch event listeners for mobile controls
+canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
 
 // Add fullscreen event listeners (F11, browser controls, etc.)
 document.addEventListener('fullscreenchange', handleFullscreenChange);

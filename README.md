@@ -8,6 +8,7 @@ Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move 
 
 ## 🎮 Controls
 
+### Desktop
 - **Arrow Keys**: Move all snakes
 - **P**: Pause
 - **R**: Restart
@@ -18,9 +19,14 @@ Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move 
 - **I**: Toggle individual speeds (when speed increase is on)
 - **Escape**: Close settings
 
+### Mobile
+- **Swipe**: Move all snakes (up/down/left/right)
+- **Tap**: Access pause menu and settings
+- **All other controls**: Same as desktop
+
 ## ❓ How to Play
 
-1. Use arrow keys to move your snake
+1. Use arrow keys (desktop) or swipe (mobile) to move your snake
 2. Eat the red fruit to grow and spawn new snakes
 3. Avoid hitting yourself or other snakes
 4. Watch the live counter at the top
@@ -34,3 +40,5 @@ Classic Snake but with a twist - eat fruit to spawn new snakes! All snakes move 
 - **Fullscreen**: Press F11 for immersive gameplay
 
 Settings save automatically when you change them!
+
+## ⚠️⚠️ Designed for keyboard - preliminary touch controls added, but only default game settings work on mobile ⚠️⚠️
