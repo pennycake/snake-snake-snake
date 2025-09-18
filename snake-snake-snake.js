@@ -838,18 +838,26 @@ function handleButtonClick(canvasX, canvasY) {
             return;
         }
         
-        // Restart button
-        if (canvasY >= startY + 50 - buttonHeight/2 && canvasY <= startY + 50 + buttonHeight/2) {
-            restartGame();
-            console.log('Game restarted');
-            return;
-        }
-        
-        // Resume button (pause menu only)
-        if (gamePaused && canvasY >= startY + 100 - buttonHeight/2 && canvasY <= startY + 100 + buttonHeight/2) {
+        // Resume button (pause menu only) - at position +70
+        if (gamePaused && canvasY >= startY + 50 - buttonHeight/2 && canvasY <= startY + 50 + buttonHeight/2) {
             gamePaused = false;
             showSettings = false;
             console.log('Game resumed');
+            return;
+        }
+        
+        // Restart button - different positions for game over vs pause
+        if (gameOver && canvasY >= startY + 50 - buttonHeight/2 && canvasY <= startY + 50 + buttonHeight/2) {
+            // Game over screen: restart at +70
+            restartGame();
+            console.log('Game restarted from game over');
+            return;
+        }
+        
+        if (gamePaused && canvasY >= startY + 100 - buttonHeight/2 && canvasY <= startY + 100 + buttonHeight/2) {
+            // Pause screen: restart at +120
+            restartGame();
+            console.log('Game restarted from pause');
             return;
         }
     } else {
